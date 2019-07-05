@@ -1,0 +1,274 @@
+% AJPM
+\documentclass[14pt]{extbook} % [Tamaño del papel] y {Tipo del documento}
+
+% +-----------------+
+% |  Cosas básicas  |
+% +-----------------+
+
+% Encoding
+\usepackage[utf8]{inputenc}			% Usar el encoding en UTF8 (ayuda para caracteres especiales)
+\usepackage[T1]{fontenc}			% Más ayuda para tener caracteres especiales
+\usepackage{tipa}					% Permite usar los caracteres fonéticos chéveres que sólo aparecen en la página en la que se muestra cómo pronunciar ex hypothesi
+
+% Lenguaje
+\usepackage[spanish]{babel}			% Configurar Babel para que maneje 
+										% el documento según las reglas del español
+
+% Vínculos internos
+\usepackage{hyperref}			% Hace que los puntos del índice redirijan a las partes del PDF. ¿Genial, no?
+
+% Empezar el conteo de notas (pies de página) en cada capítulo
+\usepackage{etoolbox}			% No sé si esto deba ir aquí ¯\_(ツ)_/¯
+\makeatletter
+	\pretocmd{\@schapter}{\setcounter{footnote}{0}}{}{}
+	\pretocmd{\@chapter}{\setcounter{footnote}{0}}{}{}
+\makeatother
+
+% +-----------------+
+
+
+% +-----------------------------------+
+% | Orden del documento y otras cosas |
+% +-----------------------------------+
+\renewcommand{\contentsname}{Índice}				% Cambiar título del índice
+\usepackage{tocvsec2}								% Libreria para controlar mejor qué aparece en el índice
+\maxtocdepth{chapter}						% Sólo muestra los capítulos en el índice, ignorando las secciones y todo lo demás
+% +-----------------+
+
+
+% +-----------------------------+
+% | Visualización del documento |
+% +-----------------------------+
+
+% Cambiar margenes
+\usepackage[letterpaper, margin=3cm, bmargin=3.5cm]{geometry} % Papel carta, todos los margenes de 3cm, mover la línea con número de página y demás info
+
+% Cabeceras
+\usepackage{fancyhdr}					% Permite modificar la cabecera y la parte inferior (ni idea cómo se llame) de la página
+\pagestyle{fancy}						% Usar fancyhdr en el estilo de las páginas
+\fancyhf{}								% Quitar lo que sea que tenga la cabecera y el pié de página
+\renewcommand{\headrulewidth}{0pt}		% Quitar la línea superior (reducirla a 0 puntos)
+
+% Interlineado
+\usepackage{setspace}
+
+% Usar Cormorant Garamond como tipografía
+\usepackage{fontspec}
+\usepackage[T1]{fontenc}
+\setmainfont[Path = fonts/, BoldFont={Cormorant-bold.ttf}, ItalicFont={Cormorant-italic.ttf},BoldItalicFont={CormorantGaramond-BoldItalic.ttf}]{Cormorant-Regular.ttf}
+
+% Pa poder usar tablas
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+
+% Usar imágenes
+\usepackage{graphicx}
+\graphicspath{ {img/} }				% La carpeta en la que se guardan las imágenes
+
+% Colores
+\usepackage[table]{xcolor}						% Librería para tener un mejor manejo de colores
+\definecolor{ehAzul1}{rgb}{0.35,0.55,0.85}		% Azul oscuro
+\definecolor{ehAzul2}{rgb}{0.75,0.85,0.95}		% Azul claro
+\hypersetup{									% Configurar colores de los vínculos dentro del documento
+	colorlinks=true,
+	linkcolor=black,
+	urlcolor=ehAzul1,
+	citecolor=ehAzul1,
+}
+
+\urlstyle{same}
+
+% +-----------------+
+
+
+% +---------------+
+% |  Maquetación  |
+% +---------------+
+
+% Manejo de párrafos
+\setlength{\parskip}{1em}			% Espacio entre párrafos
+
+% +-----------------+
+
+
+% +-----------+
+% |  Títulos  |
+% +-----------+
+
+% Librería para modificar títulos
+\usepackage{titlesec}
+\usepackage{titling}
+
+% Cambiar los títulos de los capítulos
+\titleformat
+{\chapter} 								% Especifica que se van a editar los títulos de los capítulos
+[display] 								% La configuración de cómo mostrar el título, en este caso centrado
+{\linespread{0}\large\bfseries} 		% Texto centrado\negrilla\texto grande\itálica
+{\thechapter}				 			% Cómo poner el número del capítulo, si se quiere
+{0.5ex} 								% Separador
+{\vspace{1cm}} 										% Código antes del título
+[\vspace{1cm}] 										% Código después del título
+
+\titlespacing{\chapter}{0.8cm}{-1ex}{1pc}	% Cuadrar bién el título de los artículos
+
+
+% Cambiar los títulos de las secciones
+\renewcommand{\thesection}{\arabic{section}}	% Modifica la numeración de las secciones para que sólo ponga el número de la sección y no el del capítulo (evita secciones 0.1, 0.2, 0.3, etc)
+\titleformat
+{\section}									% Especifica que se van a editar los títulos de las secciones
+[hang]										% La configuración de cómo mostrar el título, en este caso justificado a la izquierda
+{\normalsize\bfseries}							% Formato en el que aparecerá el texto, letra grande y en negrita (bold)
+{\thesection.}								% El número de la sección
+{1ex}										% Espacio entre el número y el nombre de la sección
+{}											% Código antes del título
+[]											% Código después del título
+
+\titlespacing{\section}{0.8cm}{0.5cm}{0cm}	% Cuadrar bién las secciones, que por el interlineado entre párrafos queda inmundo
+
+% Manejo de títulos de cada capítulo con su respectivo autor
+% Amamos (sí, tú también) a este extraño :D https://tex.stackexchange.com/questions/156862/displaying-author-for-each-chapter-in-book
+\usepackage{suffix}
+
+% Se define el comando usado para poner el autor y el título en el índice
+\newcommand\chapterauthor[1]{\authortoc{#1}\printchapterauthor{#1}}
+\WithSuffix\newcommand\chapterauthor*[1]{\printchapterauthor{#1}}
+
+% Comando para poner el autor del capítulo debajo del título
+\makeatletter
+\newcommand{\printchapterauthor}[2]{%
+	{\parindent0.8cm\vspace*{-45pt}%
+		\linespread{1.1}\small\scshape#1\footnote{#2}%
+		\par\nobreak\vspace*{50pt}}
+	\@afterheading%
+}
+
+% Comando para poner el autor en el índice
+\newcommand{\authortoc}[1]{%
+	\addtocontents{toc}{\vskip-20pt}		% Especifica el espacio entre el título del artículo y su autor
+	\addtocontents{toc}{%
+		\protect\contentsline{chapter}%
+		{\hskip1.5em\mdseries\scshape\protect\footnotesize#1}{}{}}
+	\addtocontents{toc}{\vskip-10pt}		% Especifica el espacio entre el nombre del autor y el siguiente título
+}
+\makeatother
+
+% Comando para poner título, autor, información del autor, y poner título y autor en la cabecera y pié de página
+\makeatother
+\newcommand{\infoCap}[4]{			% Argumentos: 1) Título del artículo 1 2) Título del artículo 2 
+									% 3) Autor 4) Información del autor
+									% A veces es necesario poner el título en más de una línea
+									% (En especial porque los filósofos ponen títulos DEMASIADO largos),
+									% pero poner \\ dentro del arg #1 jode con la función que pone
+									% el título en la cabecera de la página. Por eso el título está dividido
+									% en dos argumentos diferentes. El segundo se puede dejar vadío si no
+									% hace falta dividir el título, y no pasa nada malo. Es un workaround
+									% horrible, pero funciona
+	\chapter*{#1\\#2}				% Títuloombre del capítulo
+	\addcontentsline{toc}{chapter}{\normalsize #1~#2}				% Añadir el título del capítulo al índice
+	\chapterauthor{#3}{#4}			% Poner al autor del capítulo debajo del título y en el índice
+	\fancyfoot[RE,RO]{{\footnotesize #1\\#2\\\scshape\vspace{-0.2cm}#3}}	% Poner título y autor al lado derecho del pie de página
+	% Esta vaina son las cabeceras. Ni p idea de cómo funcionan :D
+	\fancyhead[LE]{\hspace*{-0.2\headwidth}\colorbox{ehAzul2}{\makebox[\dimexpr0.2\headwidth-2\fboxsep][c]{\strut\textcolor{ehAzul1}{\bfseries\thepage}}}%
+		\colorbox{ehAzul1}{\makebox[\dimexpr\headwidth-2\fboxsep][l]{\strut\scshape\textcolor{ehAzul2}{\bfseries#1\ldots}}}}
+	\fancyhead[LO]{\colorbox{ehAzul1}{\makebox[\dimexpr\headwidth-2\fboxsep][r]{\strut\scshape\textcolor{ehAzul2}{\bfseries#1\ldots}}}%
+		\colorbox{ehAzul2}{\makebox[\dimexpr0.2\headwidth-2\fboxsep][c]{\strut\textcolor{ehAzul1}{\bfseries\thepage}}}}
+	\renewcommand{\headrulewidth}{0pt}
+}
+\makeatother
+
+% +-----------------+
+
+
+% +-----------------+
+% |  Bibliografías  |
+% +-----------------+
+
+% Librerías
+\usepackage[sectionbib]{natbib}			% Librería para tener una bibliografía por capítulo
+\usepackage{chapterbib}					% Hmmm, esta librería parece hacer lo que creo que hace la anterior, pero ambas son necesarias
+\usepackage{apalike}					% Librería para usar APA en los artículos
+
+% Comando para poner bien las referencias en cada artículo
+\newcommand{\referencias}{
+	\renewcommand{\bibname}{\normalsize Referencias\vspace{-1.5cm}}		% Cambia el nombre a Referencias y reduce el espacio entre este y la bibliografía
+	\bibliographystyle{apalike}											% Usar el estilo APA
+	{\footnotesize \bibliography{tex/bibliografia-No1}}					% Especifica el archibo que contiene la información bibliográfica
+}
+
+% +-----------------+
+
+
+% +----------------------+
+% |  Info del documento  |
+% +----------------------+
+
+\title{\textit{\textcolor{ehAzul1}{\textbf{ex}}\textcolor{ehAzul2}{$\rightarrow$}\textcolor{ehAzul1}{\vspace{-0.4cm}hypothesi}}}		 				% Título de la revista
+\date{}								% No poner ninguna fecha para que no salga
+
+% +-----------------+
+
+
+% +---------------+
+% |  "Variables"  |
+% +---------------+
+
+% Los que más cambian
+\newcommand{\numeroRevista}{1}										% El numero de la revista
+\newcommand{\semestre}{2019-1}										% El semestre en el que se hizo el número
+\newcommand{\representante}{Martín Buenahora Bonilla}				% Representante de estudiantes actual
+\newcommand{\editores}{	Pablo Rivas Robledo\tabularnewline			% Miembros del comité editorial
+						& Martín Buenahora Bonilla}
+\newcommand{\profesores}{	Juan Camilo Espejo Serna\tabularnewline
+							& Mariano Lozano Ramírez (corrección de estilo)}
+
+% Estos, en principio, no deberían cambiar tanto
+\newcommand{\rector}{Obdulio Velásquez Posada}				% Rector/a actual de la U
+\newcommand{\decano}{Bogdan Piotrowski}						% Decano/a actual de la facultad
+\newcommand{\director}{Carmen Elena Arboleda}				% Director/a actual del programa
+
+% +-----------------+
+
+
+\begin{document}
+
+% +-----------------------+
+% |  Preambula articulii  |
+% +-----------------------+
+
+\maketitle									% Título del libro/revista
+
+\input{tex/00-infoYDerechos}				% Información sobre la revista y los derechos de autor
+
+\tableofcontents							% Índice
+
+\small					% La tipografía normal del documento es
+						% small, no normalzise. Esto se debe a que
+						% era la forma más sencilla de conseguir 
+						% _este_ tamaño de letra. 10pt, 11pt, 12pt
+						% etc. no daban este resultado, ya que siempre
+						% era o muy grande o muy pequeño. Aunque esto
+						% seguramente va a cambiar pronto, pero me
+						% parece bueno recordar por qué carajos
+						% hay un  small aquí.
+
+% Configurar pié de página con la info de la revista. Esto está aquí para que aparezca _después_ y no antes del índice, que se vería feo
+\fancyfoot[LE,LO]{{\footnotesize\textit{ex hypothesi}\\Una publicación de \textit{Neuronum}\\\vspace{-0.2cm}ISSN: 2422-5193}}
+\renewcommand{\footrulewidth}{0.5pt}
+\futurelet\TMPfootrule\def\footrule{{\color{ehAzul1}\TMPfootrule}}
+
+\onehalfspacing								% Interlineado 1.5
+
+% +-----------------+
+
+
+% +-------------+
+% |  Artículos  |
+% +-------------+
+
+%\include{./tex/}
+
+% +-----------------+
+
+
+\end{document}
