@@ -1,0 +1,12 @@
+# Carpetas a ignorar
+originales
+
+# Tipos de archivo a ignorar
+*.aux
+*.bbl
+*.blg
+*.gz
+*.log
+*.out
+*.sh
+*.toc
