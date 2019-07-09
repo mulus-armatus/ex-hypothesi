@@ -2130,26 +2130,12 @@
     <bcf:datasource type="file" datatype="bibtex">tex/99-bibliografia-No2.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="1">
-    <bcf:citekey order="1">Foucault2001</bcf:citekey>
-    <bcf:citekey order="2">Foucault2009</bcf:citekey>
-    <bcf:citekey order="3">Laercio2007</bcf:citekey>
-  </bcf:section>
-  <!-- SECTION 0 (cont.) -->
-  <bcf:section number="0">
-  </bcf:section>
-  <!-- SECTION 2 -->
-  <bcf:bibdata section="2">
-    <bcf:datasource type="file" datatype="bibtex">tex/99-bibliografia-No2.bib</bcf:datasource>
-  </bcf:bibdata>
-  <bcf:section number="2">
-    <bcf:citekey order="1">Aristoteles1994</bcf:citekey>
-    <bcf:citekey order="2">Descartes2008</bcf:citekey>
-    <bcf:citekey order="3">Descartes2010</bcf:citekey>
-    <bcf:citekey order="4">Marquard2006</bcf:citekey>
-    <bcf:citekey order="5">McGrath2006</bcf:citekey>
-    <bcf:citekey order="6">Pieper1988</bcf:citekey>
-    <bcf:citekey order="7">Salinas1995</bcf:citekey>
-    <bcf:citekey order="8">Shakespeare2008</bcf:citekey>
+    <bcf:citekey order="1">Durkheim1982</bcf:citekey>
+    <bcf:citekey order="2">Eagleton1994</bcf:citekey>
+    <bcf:citekey order="3">Eliade1967</bcf:citekey>
+    <bcf:citekey order="4">Eliade1989</bcf:citekey>
+    <bcf:citekey order="5">Eliade2006</bcf:citekey>
+    <bcf:citekey order="6">WellekETC2002</bcf:citekey>
   </bcf:section>
   <!-- SECTION 0 (cont.) -->
   <bcf:section number="0">
@@ -2193,15 +2179,6 @@
   </bcf:sortingtemplate>
   <!-- DATALISTS -->
   <bcf:datalist section="1"
-                name="apa/global//global/global"
-                type="entry"
-                sortingtemplatename="apa"
-                sortingnamekeytemplatename="global"
-                labelprefix=""
-                uniquenametemplatename="global"
-                labelalphanametemplatename="global">
-  </bcf:datalist>
-  <bcf:datalist section="2"
                 name="apa/global//global/global"
                 type="entry"
                 sortingtemplatename="apa"
