@@ -79,6 +79,13 @@
 
 \urlstyle{same}
 
+% Separador
+\newcommand{\separador}{
+	\begin{center}
+		{\vspace{0.5cm}\large *~~~~~*~~~~~*\vspace{0.5cm}}
+	\end{center}
+}
+
 % +-----------------+
 
 
@@ -138,7 +145,7 @@
 \makeatletter
 \newcommand{\printchapterauthor}[2]{%
 	{\parindent0.8cm\vspace*{-45pt}%
-		\linespread{1.1}\small\scshape#1\footnote{#2}%
+		\linespread{1.1}\small\scshape#1\ifthenelse{\equal{#2}{}}{}{\footnote{#2}}%
 		\par\nobreak\vspace*{50pt}}
 	\@afterheading%
 }
@@ -155,7 +162,7 @@
 
 % Comando para poner título, autor, información del autor, y poner título y autor en la cabecera y pié de página
 \makeatother
-\newcommand{\infoCap}[4]{			% Argumentos: 1) Título del artículo 1 2) Título del artículo 2 
+\newcommand{\infoCap}[5]{			% Argumentos: 1) Título del artículo 1 2) Título del artículo 2 
 									% 3) Autor 4) Información del autor
 									% A veces es necesario poner el título en más de una línea
 									% (En especial porque los filósofos ponen títulos DEMASIADO largos),
@@ -164,10 +171,15 @@
 									% en dos argumentos diferentes. El segundo se puede dejar vadío si no
 									% hace falta dividir el título, y no pasa nada malo. Es un workaround
 									% horrible, pero funciona
-	\chapter*{#1\\#2}				% Títuloombre del capítulo
-	\addcontentsline{toc}{chapter}{\normalsize #1~#2}				% Añadir el título del capítulo al índice
-	\chapterauthor{#3}{#4}			% Poner al autor del capítulo debajo del título y en el índice
-	\fancyfoot[RE,RO]{{\footnotesize #1\\#2\\\scshape\vspace{-0.2cm}#3}}	% Poner título y autor al lado derecho del pie de página
+	\ifthenelse{\equal{#2}{}}{\chapter*{#1\ifthenelse{\equal{#3}{}}{}{\footnote{#3}}}}{\chapter*{#1\\#2\ifthenelse{\equal{#3}{}}{}{\footnote{#3}}}} 		% Título del capítulo
+	\ifthenelse{\equal{#2}{}}{		% Añadir el título del capítulo al índice
+		\addcontentsline{toc}{chapter}{\normalsize #1}
+	}
+	{
+		\addcontentsline{toc}{chapter}{\normalsize #1~#2}
+	}
+	\chapterauthor{#4}{#5}			% Poner al autor del capítulo debajo del título y en el índice
+	\fancyfoot[RE,RO]{{\footnotesize \ifthenelse{\equal{#2}{}}{#1}{#1\\#2}\\\scshape\vspace{-0.2cm}#4}}	% Poner título y autor al lado derecho del pie de página
 	% Esta vaina son las cabeceras. Ni p idea de cómo funcionan :D
 	\fancyhead[LE]{\hspace*{-0.2\headwidth}\colorbox{ehAzul2}{\makebox[\dimexpr0.2\headwidth-2\fboxsep][c]{\strut\textcolor{ehAzul1}{\bfseries\thepage}}}%
 		\colorbox{ehAzul1}{\makebox[\dimexpr\headwidth-2\fboxsep][l]{\strut\scshape\textcolor{ehAzul2}{\bfseries#1\ldots}}}}
@@ -185,15 +197,17 @@
 % +-----------------+
 
 % Librerías
-\usepackage[sectionbib]{natbib}			% Librería para tener una bibliografía por capítulo
-\usepackage{chapterbib}					% Hmmm, esta librería parece hacer lo que creo que hace la anterior, pero ambas son necesarias
-\usepackage{apalike}					% Librería para usar APA en los artículos
+%\usepackage[sectionbib]{natbib}			% Librería para tener una bibliografía por capítulo
+%\usepackage{chapterbib}					% Hmmm, esta librería parece hacer lo que creo que hace la anterior, pero ambas son necesarias
+%\usepackage{apalike}					% Librería para usar APA en los artículos
+
+\usepackage[style=apa,backend=biber]{biblatex}
+\addbibresource{tex/99-bibliografia-No2.bib}
 
 % Comando para poner bien las referencias en cada artículo
 \newcommand{\referencias}{
 	\renewcommand{\bibname}{\normalsize Referencias\vspace{-1.5cm}}		% Cambia el nombre a Referencias y reduce el espacio entre este y la bibliografía
-	\bibliographystyle{apalike}											% Usar el estilo APA
-	{\footnotesize \bibliography{tex/bibliografia-No1}}					% Especifica el archibo que contiene la información bibliográfica
+	{\footnotesize \printbibliography}					% Especifica el archibo que contiene la información bibliográfica
 }
 
 % +-----------------+
@@ -266,7 +280,8 @@
 % |  Artículos  |
 % +-------------+
 
-%\include{./tex/}
+\include{./tex/01-respuestaCaceres}
+\include{./tex/02-aperturaFilosofia}
 
 % +-----------------+
 
