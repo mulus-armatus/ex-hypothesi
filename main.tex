@@ -1,6 +1,8 @@
 % AJPM
 \documentclass[14pt]{extbook} % [Tamaño del papel] y {Tipo del documento}
 
+%\usepackage[all]{nowidow}
+
 % +-----------------+
 % |  Cosas básicas  |
 % +-----------------+
@@ -69,7 +71,7 @@
 % Colores
 \usepackage[table]{xcolor}						% Librería para tener un mejor manejo de colores
 \definecolor{ehAzul1}{rgb}{0.35,0.55,0.85}		% Azul oscuro
-\definecolor{ehAzul2}{rgb}{0.75,0.85,0.95}		% Azul claro
+\definecolor{ehAzul2}{rgb}{0.65,0.75,0.95}		% Azul claro
 \hypersetup{									% Configurar colores de los vínculos dentro del documento
 	colorlinks=true,
 	linkcolor=black,
@@ -82,7 +84,8 @@
 % Separador
 \newcommand{\separador}{
 	\begin{center}
-		{\vspace{0.5cm}\large *~~~~~*~~~~~*\vspace{0.5cm}}
+%		{\vspace{0.5cm}\large *~~~~~*~~~~~*\vspace{0.5cm}}
+		{\textcolor{ehAzul2}{\vspace{1cm}\large $\diamond$$\diamond$$\rightarrow$$\diamond$$\diamond$$\diamond$$\diamond$$\diamond$$\diamond$$\diamond$$\diamond$\vspace{-1cm}}}
 	\end{center}
 }
 
@@ -182,8 +185,9 @@
 	\fancyfoot[RE,RO]{{\footnotesize \ifthenelse{\equal{#2}{}}{#1}{#1\\#2}\\\scshape\vspace{-0.2cm}#4}}	% Poner título y autor al lado derecho del pie de página
 	% Esta vaina son las cabeceras. Ni p idea de cómo funcionan :D
 	\fancyhead[LE]{\hspace*{-0.2\headwidth}\colorbox{ehAzul2}{\makebox[\dimexpr0.2\headwidth-2\fboxsep][c]{\strut\textcolor{ehAzul1}{\bfseries\thepage}}}%
-		\colorbox{ehAzul1}{\makebox[\dimexpr\headwidth-2\fboxsep][l]{\strut\scshape\textcolor{ehAzul2}{\bfseries#1\ldots}}}}
-	\fancyhead[LO]{\colorbox{ehAzul1}{\makebox[\dimexpr\headwidth-2\fboxsep][r]{\strut\scshape\textcolor{ehAzul2}{\bfseries#1\ldots}}}%
+		\colorbox{ehAzul1}{\makebox[\dimexpr\headwidth-2\fboxsep][l]{\strut\scshape\textcolor{ehAzul2}{\bfseries
+					\ifthenelse{\equal{#2}{}}{#1}{#1\ldots}}}}}
+	\fancyhead[LO]{\colorbox{ehAzul1}{\makebox[\dimexpr\headwidth-2\fboxsep][r]{\strut\scshape\textcolor{ehAzul2}{\bfseries\ifthenelse{\equal{#2}{}}{#1}{#1\ldots}}}}%
 		\colorbox{ehAzul2}{\makebox[\dimexpr0.2\headwidth-2\fboxsep][c]{\strut\textcolor{ehAzul1}{\bfseries\thepage}}}}
 	\renewcommand{\headrulewidth}{0pt}
 }
@@ -213,33 +217,35 @@
 % +-----------------+
 
 
-% +----------------------+
-% |  Info del documento  |
-% +----------------------+
-
-\title{\textit{\textcolor{ehAzul1}{\textbf{ex}}\textcolor{ehAzul2}{$\rightarrow$}\textcolor{ehAzul1}{\vspace{-0.4cm}hypothesi}}}		 				% Título de la revista
-\date{}								% No poner ninguna fecha para que no salga
-
-% +-----------------+
-
-
 % +---------------+
 % |  "Variables"  |
 % +---------------+
 
 % Los que más cambian
-\newcommand{\numeroRevista}{1}										% El numero de la revista
-\newcommand{\semestre}{2019-1}										% El semestre en el que se hizo el número
-\newcommand{\representante}{Martín Buenahora Bonilla}				% Representante de estudiantes actual
+\newcommand{\numeroRevista}{2}										% El numero de la revista
+\newcommand{\volumen}{1}											% El número del volumen
+\newcommand{\semestre}{2019-2}										% El semestre en el que se hizo el número
+\newcommand{\representante}{Juliana Ocampo Guzman}				% Representante de estudiantes actual
 \newcommand{\editores}{	Pablo Rivas Robledo\tabularnewline			% Miembros del comité editorial
+						& Juan Camilo Espejo Serna\tabularnewline
 						& Martín Buenahora Bonilla}
-\newcommand{\profesores}{	Juan Camilo Espejo Serna\tabularnewline
-							& Mariano Lozano Ramírez (corrección de estilo)}
+%\newcommand{\profesores}{	Juan Camilo Espejo Serna\tabularnewline
+%							& Mariano Lozano Ramírez (corrección de estilo)}
 
 % Estos, en principio, no deberían cambiar tanto
 \newcommand{\rector}{Obdulio Velásquez Posada}				% Rector/a actual de la U
 \newcommand{\decano}{Bogdan Piotrowski}						% Decano/a actual de la facultad
 \newcommand{\director}{Carmen Elena Arboleda}				% Director/a actual del programa
+
+% +-----------------+
+
+
+% +----------------------+
+% |  Info del documento  |
+% +----------------------+
+
+\title{\vspace{16cm}\textit{\textcolor{ehAzul1}{\textbf{ex}}\textcolor{ehAzul2}{$\rightarrow$}\textcolor{ehAzul1}{\vspace{-0.4cm}hypothesi}}}		 				% Título de la revista
+\date{\vspace{-3.2cm}\normalsize \textcolor{ehAzul1}{Número \numeroRevista{}\\Volumen \volumen{}}}								% No poner ninguna fecha para que no salga
 
 % +-----------------+
 
@@ -250,7 +256,9 @@
 % |  Preambula articulii  |
 % +-----------------------+
 
+\newgeometry{left=3cm, bottom=0cm}
 \maketitle									% Título del libro/revista
+\restoregeometry
 
 \input{tex/00-infoYDerechos}				% Información sobre la revista y los derechos de autor
 
