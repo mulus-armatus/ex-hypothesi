@@ -81,11 +81,15 @@
 
 \urlstyle{same}
 
-% Separador
-\newcommand{\separador}[1]{
+% Separador siguiendo el logo de ex hypothesi
+\newcommand{\separador}[1]{				% Si el argumento es 1, se usan o, para separar secciones dentro
+										% del documento. Si tiene otro valor, se usan ·, para el final del
+										% artículo
 	\begin{center}
-%		{\vspace{0.5cm}\large *~~~~~*~~~~~*\vspace{0.5cm}}
-		{\textcolor{#1}{\vspace{1cm}\large $\diamond$$\diamond$$\rightarrow$$\diamond$$\diamond$$\diamond$$\diamond$$\diamond$$\diamond$$\diamond$$\diamond$\vspace{-1cm}}}
+		\ifthenelse{\equal{#1}{1}}
+		{{\textcolor{ehAzul2}{\vspace{1cm}\large $\circ$$\circ$$\rightarrow$$\circ$$\circ$$\circ$$\circ$$\circ$$\circ$$\circ$$\circ$\vspace{-1cm}}}}
+		{{\textcolor{ehAzul2}{\vspace{1cm}\large $\bullet$$\bullet$$\rightarrow$$\bullet$$\bullet$$\bullet$$\bullet$$\bullet$$\bullet$$\bullet$$\bullet$\vspace{-1cm}}}}
+		
 	\end{center}
 }
 
@@ -124,7 +128,7 @@
 
 
 % Cambiar los títulos de las secciones
-\renewcommand{\thesection}{\arabic{section}}	% Modifica la numeración de las secciones para que sólo ponga el número de la sección y no el del capítulo (evita secciones 0.1, 0.2, 0.3, etc)
+\renewcommand{\thesection}{\Roman{section}}	% Modifica la numeración de las secciones para que sólo ponga el número de la sección y no el del capítulo (evita secciones 0.1, 0.2, 0.3, etc)
 \titleformat
 {\section}									% Especifica que se van a editar los títulos de las secciones
 [hang]										% La configuración de cómo mostrar el título, en este caso justificado a la izquierda
