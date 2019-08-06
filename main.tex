@@ -70,6 +70,7 @@
 
 % Colores
 \usepackage[table]{xcolor}						% Librería para tener un mejor manejo de colores
+\definecolor{principal}{rgb}{0.15, 0.15, 0.25}
 \definecolor{ehAzul1}{rgb}{0.35,0.55,0.85}		% Azul oscuro
 \definecolor{ehAzul2}{rgb}{0.65,0.75,0.95}		% Azul claro
 \hypersetup{									% Configurar colores de los vínculos dentro del documento
@@ -78,6 +79,9 @@
 	urlcolor=ehAzul1,
 	citecolor=ehAzul1,
 }
+\color{principal}
+\renewcommand\thefootnote{\textcolor{ehAzul1}{\footnotesize{\arabic{footnote}}}}
+
 
 \urlstyle{same}
 
