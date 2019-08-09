@@ -1,7 +1,7 @@
 % AJPM
 \documentclass[14pt]{extbook} % [Tamaño del papel] y {Tipo del documento}
 
-%\usepackage[all]{nowidow}
+\usepackage[all]{nowidow}		% Creo que esto no hace nada, pero me da miedo que sí y me toque volver a revisar si hay viudas
 
 % +-----------------+
 % |  Cosas básicas  |
@@ -70,7 +70,7 @@
 
 % Colores
 \usepackage[table]{xcolor}						% Librería para tener un mejor manejo de colores
-\definecolor{principal}{rgb}{0.15, 0.15, 0.25}
+\definecolor{principal}{rgb}{0.15, 0.15, 0.25}	% Gis oscuro
 \definecolor{ehAzul1}{rgb}{0.35,0.55,0.85}		% Azul oscuro
 \definecolor{ehAzul2}{rgb}{0.65,0.75,0.95}		% Azul claro
 \hypersetup{									% Configurar colores de los vínculos dentro del documento
@@ -79,8 +79,8 @@
 	urlcolor=ehAzul1,
 	citecolor=ehAzul1,
 }
-\color{principal}
-\renewcommand\thefootnote{\textcolor{ehAzul1}{\footnotesize{\arabic{footnote}}}}
+\color{principal}								% Usar un color gris oscuro para la tipografía
+\renewcommand\thefootnote{\textcolor{ehAzul1}{\footnotesize{\arabic{footnote}}}}		% Poner los pies de página de color azul
 
 
 \urlstyle{same}
@@ -184,11 +184,12 @@
 									% horrible, pero funciona
 	\ifthenelse{\equal{#2}{}}{\chapter*{#1\ifthenelse{\equal{#3}{}}{}{\footnote{#3}}}}{\chapter*{#1\\#2\ifthenelse{\equal{#3}{}}{}{\footnote{#3}}}} 		% Título del capítulo
 	\ifthenelse{\equal{#2}{}}{		% Añadir el título del capítulo al índice
-		\addcontentsline{toc}{chapter}{\normalsize #1}
+		\addcontentsline{toc}{chapter}{\normalsize #1}		% Si sólo tiene una parte el título
 	}
 	{
-		\addcontentsline{toc}{chapter}{\normalsize #1~#2}
+		\addcontentsline{toc}{chapter}{\normalsize #1~#2}	% Si tiene dos partes el título
 	}
+	\setcounter{section}{0}			% Reiniciar contador de secciones dentro de sus capítulos
 	\chapterauthor{#4}{#5}			% Poner al autor del capítulo debajo del título y en el índice
 	\fancyfoot[RE,RO]{{\footnotesize \ifthenelse{\equal{#2}{}}{#1}{#1\\#2}\\\scshape\vspace{-0.2cm}#4}}	% Poner título y autor al lado derecho del pie de página
 	% Esta vaina son las cabeceras. Ni p idea de cómo funcionan :D
@@ -208,13 +209,8 @@
 % |  Bibliografías  |
 % +-----------------+
 
-% Librerías
-%\usepackage[sectionbib]{natbib}			% Librería para tener una bibliografía por capítulo
-%\usepackage{chapterbib}					% Hmmm, esta librería parece hacer lo que creo que hace la anterior, pero ambas son necesarias
-%\usepackage{apalike}					% Librería para usar APA en los artículos
-
-\usepackage[style=apa,backend=biber]{biblatex}
-\addbibresource{tex/99-bibliografia-No2.bib}
+\usepackage[style=apa,backend=biber]{biblatex}		% Usar biblatex para hacer las bibliografías, en estilo apa y con biber
+\addbibresource{tex/99-bibliografia-No2.bib}		% El archivo de la bibliografía
 
 % Comando para poner bien las referencias en cada artículo
 \newcommand{\referencias}{
@@ -237,7 +233,7 @@
 \newcommand{\editores}{	Pablo Rivas Robledo\tabularnewline			% Miembros del comité editorial
 						& Juan Camilo Espejo Serna\tabularnewline
 						& Martín Buenahora Bonilla}
-%\newcommand{\profesores}{	Juan Camilo Espejo Serna\tabularnewline
+\newcommand{\profesores}{	Juan Camilo Espejo Serna}
 %							& Mariano Lozano Ramírez (corrección de estilo)}
 
 % Estos, en principio, no deberían cambiar tanto
@@ -271,16 +267,6 @@
 \input{tex/00-infoYDerechos}				% Información sobre la revista y los derechos de autor
 
 \tableofcontents							% Índice
-
-\normalsize					% La tipografía normal del documento es
-						% small, no normalzise. Esto se debe a que
-						% era la forma más sencilla de conseguir 
-						% _este_ tamaño de letra. 10pt, 11pt, 12pt
-						% etc. no daban este resultado, ya que siempre
-						% era o muy grande o muy pequeño. Aunque esto
-						% seguramente va a cambiar pronto, pero me
-						% parece bueno recordar por qué carajos
-						% hay un  small aquí.
 
 % Configurar pié de página con la info de la revista. Esto está aquí para que aparezca _después_ y no antes del índice, que se vería feo
 \fancyfoot[LE,LO]{{\footnotesize\textit{ex hypothesi}\\Una publicación de \textit{Neuronum}\\\vspace{-0.2cm}ISSN: 2422-5193}}
