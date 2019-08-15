@@ -50,6 +50,7 @@
 \pagestyle{fancy}						% Usar fancyhdr en el estilo de las páginas
 \fancyhf{}								% Quitar lo que sea que tenga la cabecera y el pié de página
 \renewcommand{\headrulewidth}{0pt}		% Quitar la línea superior (reducirla a 0 puntos)
+\usepackage{emptypage}					% Ocultar cabeceras en las páginas entre capítulos
 
 % Interlineado
 \usepackage{setspace}
@@ -95,6 +96,15 @@
 		{{\textcolor{ehAzul2}{\vspace{1cm}\large $\bullet$$\bullet$$\rightarrow$$\bullet$$\bullet$$\bullet$$\bullet$$\bullet$$\bullet$$\bullet$$\bullet$\vspace{-1cm}}}}
 		
 	\end{center}
+}
+
+\usepackage{afterpage}
+
+\newcommand\blankpage{
+	\null
+	\thispagestyle{empty}
+	\addtocounter{page}{-1}
+	\newpage
 }
 
 % +-----------------+
@@ -231,7 +241,6 @@
 \newcommand{\semestre}{2019-2}										% El semestre en el que se hizo el número
 \newcommand{\representante}{Juliana Ocampo Guzman}				% Representante de estudiantes actual
 \newcommand{\editores}{	Pablo Rivas Robledo\tabularnewline			% Miembros del comité editorial
-						& Juan Camilo Espejo Serna\tabularnewline
 						& Martín Buenahora Bonilla}
 \newcommand{\profesores}{	Juan Camilo Espejo Serna}
 %							& Mariano Lozano Ramírez (corrección de estilo)}
@@ -290,5 +299,6 @@
 
 % +-----------------+
 
+\afterpage{\blankpage}
 
 \end{document}
