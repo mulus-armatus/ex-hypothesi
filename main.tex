@@ -17,7 +17,10 @@
 										% el documento según las reglas del español
 
 % Vínculos internos
-\usepackage{hyperref}			% Hace que los puntos del índice redirijan a las partes del PDF. ¿Genial, no?
+%\usepackage[hang, flushmargin]{footmisc}
+
+
+%\usepackage{hyperref}			% Hace que los puntos del índice redirijan a las partes del PDF. ¿Genial, no?
 
 % Empezar el conteo de notas (pies de página) en cada capítulo
 \usepackage{etoolbox}			% No sé si esto deba ir aquí ¯\_(ツ)_/¯
@@ -74,17 +77,12 @@
 \definecolor{principal}{RGB}{0.15, 0.15, 0.25}	% Gis oscuro
 \definecolor{ehAzul2}{RGB}{0,38,97}		% Azul oscuro
 \definecolor{ehAzul1}{RGB}{19,116,170}		% Azul claro
-\hypersetup{									% Configurar colores de los vínculos dentro del documento
-	colorlinks=true,
-	linkcolor=black,
-	urlcolor=ehAzul1,
-	citecolor=ehAzul1,
-}
+
 \color{principal}								% Usar un color gris oscuro para la tipografía
 \renewcommand\thefootnote{\textcolor{ehAzul1}{\footnotesize{\arabic{footnote}}}}		% Poner los pies de página de color azul
 
 
-\urlstyle{same}
+
 
 % Separador siguiendo el logo de ex hypothesi
 \newcommand{\separador}[1]{				% Si el argumento es 1, se usan o, para separar secciones dentro
@@ -230,6 +228,15 @@
 
 % +-----------------+
 
+% Este paquete es más mañoso que el putas, por lo que toca cargarlo de últimas
+\usepackage[unicode=true]{hyperref}
+\urlstyle{same}
+\hypersetup{									% Configurar colores de los vínculos dentro del documento
+	colorlinks=true,
+	linkcolor=black,
+	urlcolor=ehAzul1,
+	citecolor=ehAzul1,
+}
 
 % +---------------+
 % |  "Variables"  |
