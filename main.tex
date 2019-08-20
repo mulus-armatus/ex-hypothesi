@@ -277,11 +277,14 @@
 % +-----------------------+
 
 \newgeometry{left=3cm, bottom=0cm}
+\pdfbookmark{Portada}{portada}
 \maketitle									% Título del libro/revista
 \restoregeometry
 
 \input{tex/00-infoYDerechos}				% Información sobre la revista y los derechos de autor
 
+\cleardoublepage							% Para que lo de abajo funcione y no vincule a la página anterior
+\pdfbookmark{{\'I}ndice general}{toc}		% Añadir el índice al índice del PDF
 \tableofcontents							% Índice
 
 % Configurar pié de página con la info de la revista. Esto está aquí para que aparezca _después_ y no antes del índice, que se vería feo
