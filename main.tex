@@ -201,11 +201,11 @@
 	\chapterauthor{#4}{#5}			% Poner al autor del capítulo debajo del título y en el índice
 	\fancyfoot[RE,RO]{{\footnotesize \ifthenelse{\equal{#2}{}}{#1}{#1\\#2}\\\scshape\vspace{-0.2cm}#4}}	% Poner título y autor al lado derecho del pie de página
 	% Esta vaina son las cabeceras. Ni p idea de cómo funcionan :D
-	\fancyhead[LE]{\hspace*{-0.2\headwidth}\colorbox{ehAzul2}{\makebox[\dimexpr0.2\headwidth-2\fboxsep][c]{\strut\textcolor{ehAzul1}{\bfseries\thepage}}}%
-		\colorbox{ehAzul1}{\makebox[\dimexpr\headwidth-2\fboxsep][l]{\strut\scshape\textcolor{ehAzul2}{\bfseries
+	\fancyhead[LE]{\hspace*{-0.2\headwidth}\colorbox{ehAzul2}{\makebox[\dimexpr0.2\headwidth-2\fboxsep][c]{\strut\textcolor{white}{\bfseries\thepage}}}%
+		\colorbox{ehAzul1}{\makebox[\dimexpr\headwidth-2\fboxsep][l]{\strut\scshape\textcolor{white}{\bfseries\hspace{1.15em}
 					\ifthenelse{\equal{#2}{}}{#1}{#1\ldots}}}}}
-	\fancyhead[LO]{\colorbox{ehAzul1}{\makebox[\dimexpr\headwidth-2\fboxsep][r]{\strut\scshape\textcolor{ehAzul2}{\bfseries\ifthenelse{\equal{#2}{}}{#1}{#1\ldots}}}}%
-		\colorbox{ehAzul2}{\makebox[\dimexpr0.2\headwidth-2\fboxsep][c]{\strut\textcolor{ehAzul1}{\bfseries\thepage}}}}
+	\fancyhead[LO]{\colorbox{ehAzul1}{\makebox[\dimexpr\headwidth-2\fboxsep][r]{\strut\scshape\textcolor{white}{\bfseries\ifthenelse{\equal{#2}{}}{#1\hspace{1.15em}}{#1\ldots\hspace{1.15em}}}}}%
+		\colorbox{ehAzul2}{\makebox[\dimexpr0.2\headwidth-2\fboxsep][c]{\strut\textcolor{white}{\bfseries\thepage}}}}
 	\renewcommand{\headrulewidth}{0pt}
 }
 \makeatother
