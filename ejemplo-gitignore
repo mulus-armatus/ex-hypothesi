@@ -4,9 +4,11 @@ originales
 # Tipos de archivo a ignorar
 *.aux
 *.bbl
+*.bcf
 *.blg
 *.gz
 *.log
 *.out
+*.run.xml
 *.sh
 *.toc
